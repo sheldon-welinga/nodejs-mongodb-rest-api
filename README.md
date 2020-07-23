@@ -8,4 +8,4 @@ Run  **npm install** to install all running packages
 Create a ***MongoDB Atlas** database and configure it in the app JS.
 
 ### Running the application
-To run the application kindly perform `npm run build`.
+To run the application kindly perform `npm run dev`.
