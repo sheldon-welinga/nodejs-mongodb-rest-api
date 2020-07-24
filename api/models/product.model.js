@@ -12,6 +12,10 @@ const productSchema = new Schema({
         type: Number,
         trim: true,
         required:true
+    },
+    productImage: {
+        type: String,
+        required: true
     }
 },{
     timestamps: true

@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 
 const productRoutes = require("./api/routes/products");
 const orderRoutes = require("./api/routes/orders");
+const userRoutes = require("./api/routes/user");
 
 
 //Connect to a database
@@ -18,6 +19,7 @@ app.use(morgan('dev')); //To log something to the console showing the path and a
 // app.use(express.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+app.use('/uploads', express.static('uploads')); //for us to make the uploads folder static and accessible
 
 
 //preventing cors errors
@@ -36,6 +38,7 @@ app.use((req, res, next)=>{
 //Routes Middleware
 app.use("/products", productRoutes);
 app.use("/orders", orderRoutes);
+app.use("/users", userRoutes);
 
 
 //Handling errors

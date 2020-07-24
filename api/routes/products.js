@@ -37,7 +37,7 @@ router.get("/", (req, res, next)=>{
     //     message: "Get request /products"
     // })
     Product.find()
-            .select("name price _id")
+            .select("name price _id productImage")
             .then((products)=>{
                 // console.log(products);
                 if(products.length >0){
@@ -48,6 +48,7 @@ router.get("/", (req, res, next)=>{
                                 name: doc.name,
                                 price: doc.price,
                                 _id: doc._id,
+                                productImage: doc.productImage,
                                 request: {
                                     type: 'GET',
                                     url: "http:localhost:5000/products/"+doc._id
@@ -76,7 +77,8 @@ router.post("/", upload.single('productImage'), (req, res, next)=>{ //Posting a 
     const product = new Product({
         // _id: new Mongoose.Types.ObjectId(),
         name: req.body.name,
-        price: Number(req.body.price)
+        price: Number(req.body.price),
+        productImage: req.file.path
     })
 
     //saving items to MongoDb
@@ -108,7 +110,7 @@ router.get("/:productId", (req, res, next)=>{
     const id = req.params.productId; //getting a single element by ID
     
     Product.findById({_id: id})
-            .select('name price _id')
+            .select('name price _id productImage')
             .then(item =>{
                 console.log(item);
                 if(item){ //check if document is not null
